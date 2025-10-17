@@ -1,0 +1,56 @@
+store_name,address,item,price,lat,lon
+Walmart Supercenter,"3850 Sardis Rd N, Charlotte, NC",milk,3.5,35.1328707,-80.7617887
+Walmart Supercenter,"3850 Sardis Rd N, Charlotte, NC",bread,2.2,35.1328707,-80.7617887
+Walmart Supercenter,"3850 Sardis Rd N, Charlotte, NC",eggs,2.8,35.1328707,-80.7617887
+Walmart Supercenter,"3850 Sardis Rd N, Charlotte, NC",apples,1.5,35.1328707,-80.7617887
+Walmart Supercenter,"3850 Sardis Rd N, Charlotte, NC",chicken,5.2,35.1328707,-80.7617887
+Target,"123 Main St, Charlotte, NC",milk,3.6,35.2085479,-80.8311796
+Target,"123 Main St, Charlotte, NC",bread,2.3,35.2085479,-80.8311796
+Target,"123 Main St, Charlotte, NC",eggs,2.9,35.2085479,-80.8311796
+Target,"123 Main St, Charlotte, NC",apples,1.6,35.2085479,-80.8311796
+Target,"123 Main St, Charlotte, NC",chicken,5.1,35.2085479,-80.8311796
+Kroger,"456 Elm St, Charlotte, NC",milk,3.55,35.2350706,-80.8309223
+Kroger,"456 Elm St, Charlotte, NC",bread,2.25,35.2350706,-80.8309223
+Kroger,"456 Elm St, Charlotte, NC",eggs,2.85,35.2350706,-80.8309223
+Kroger,"456 Elm St, Charlotte, NC",apples,1.55,35.2350706,-80.8309223
+Kroger,"456 Elm St, Charlotte, NC",chicken,5.15,35.2350706,-80.8309223
+Publix,"789 Oak St, Charlotte, NC",milk,3.65,35.2900098,-80.9208726
+Publix,"789 Oak St, Charlotte, NC",bread,2.35,35.2900098,-80.9208726
+Publix,"789 Oak St, Charlotte, NC",eggs,2.95,35.2900098,-80.9208726
+Publix,"789 Oak St, Charlotte, NC",apples,1.65,35.2900098,-80.9208726
+Publix,"789 Oak St, Charlotte, NC",chicken,5.25,35.2900098,-80.9208726
+Whole Foods,"321 Pine St, Charlotte, NC",milk,3.8,35.2316134,-80.8436158
+Whole Foods,"321 Pine St, Charlotte, NC",bread,2.5,35.2316134,-80.8436158
+Whole Foods,"321 Pine St, Charlotte, NC",eggs,3.1,35.2316134,-80.8436158
+Whole Foods,"321 Pine St, Charlotte, NC",apples,1.8,35.2316134,-80.8436158
+Whole Foods,"321 Pine St, Charlotte, NC",chicken,5.5,35.2316134,-80.8436158
+Trader Joe's,"654 Maple St, Charlotte, NC",milk,3.7,35.2963295,-80.8009278
+Trader Joe's,"654 Maple St, Charlotte, NC",bread,2.4,35.2963295,-80.8009278
+Trader Joe's,"654 Maple St, Charlotte, NC",eggs,3.0,35.2963295,-80.8009278
+Trader Joe's,"654 Maple St, Charlotte, NC",apples,1.75,35.2963295,-80.8009278
+Trader Joe's,"654 Maple St, Charlotte, NC",chicken,5.3,35.2963295,-80.8009278
+ALDI,"987 Cedar St, Charlotte, NC",milk,3.25,35.2264792,-80.8570819
+ALDI,"987 Cedar St, Charlotte, NC",bread,2.1,35.2264792,-80.8570819
+ALDI,"987 Cedar St, Charlotte, NC",eggs,2.7,35.2264792,-80.8570819
+ALDI,"987 Cedar St, Charlotte, NC",apples,1.45,35.2264792,-80.8570819
+ALDI,"987 Cedar St, Charlotte, NC",chicken,4.95,35.2264792,-80.8570819
+Costco,"159 Birch St, Charlotte, NC",milk,3.4,,
+Costco,"159 Birch St, Charlotte, NC",bread,2.15,,
+Costco,"159 Birch St, Charlotte, NC",eggs,2.75,,
+Costco,"159 Birch St, Charlotte, NC",apples,1.5,,
+Costco,"159 Birch St, Charlotte, NC",chicken,5.0,,
+Harris Teeter,"753 Walnut St, Charlotte, NC",milk,3.6,,
+Harris Teeter,"753 Walnut St, Charlotte, NC",bread,2.35,,
+Harris Teeter,"753 Walnut St, Charlotte, NC",eggs,2.9,,
+Harris Teeter,"753 Walnut St, Charlotte, NC",apples,1.65,,
+Harris Teeter,"753 Walnut St, Charlotte, NC",chicken,5.2,,
+Sprouts,"852 Willow St, Charlotte, NC",milk,3.75,35.2187553,-80.9063964
+Sprouts,"852 Willow St, Charlotte, NC",bread,2.45,35.2187553,-80.9063964
+Sprouts,"852 Willow St, Charlotte, NC",eggs,3.05,35.2187553,-80.9063964
+Sprouts,"852 Willow St, Charlotte, NC",apples,1.85,35.2187553,-80.9063964
+Sprouts,"852 Willow St, Charlotte, NC",chicken,5.4,35.2187553,-80.9063964
+Food Lion,"951 Aspen St, Charlotte, NC",milk,3.5,,
+Food Lion,"951 Aspen St, Charlotte, NC",bread,2.25,,
+Food Lion,"951 Aspen St, Charlotte, NC",eggs,2.85,,
+Food Lion,"951 Aspen St, Charlotte, NC",apples,1.55,,
+Food Lion,"951 Aspen St, Charlotte, NC",chicken,5.1,,
