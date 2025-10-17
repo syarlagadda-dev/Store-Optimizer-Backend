@@ -119,7 +119,7 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
                     "items": formatted_items,
                     "item_total": float(round(total_price, 2)),
                     "miles_traveled": float(round(route_distance, 2)),
-                    "total_cost": float(round(total_with_travel, 2)),
+                    "approximate_total_cost": float(round(total_with_travel, 2)),
                     "route_order": route_order
                 }
 
@@ -140,3 +140,41 @@ if __name__ == "__main__":
     result = find_best_combo(csv_path, grocery_list, budget, max_stores, user_address)
     print("\n🔍 Best Shopping Plan:")
     print(result)
+
+
+
+
+
+# JSON output example
+'''
+{
+  "stores": [
+    "Target"
+  ],
+  "items": [
+    "bread ($2.3) : Target - 123 Main St, Charlotte, NC",
+    "eggs ($2.9) : Target - 123 Main St, Charlotte, NC",
+    "milk ($3.6) : Target - 123 Main St, Charlotte, NC"
+  ],
+  "item_total": 8.8,
+  "miles_traveled": 0.37,
+  "approximate_total_cost": 9.02,
+  "route_order": [
+    {
+      "step": 1,
+      "type": "start",
+      "address": "123 Main St, Charlotte, NC 28202"
+    },
+    {
+      "step": 2,
+      "type": "store",
+      "address": "Target - 123 Main St, Charlotte, NC"
+    },
+    {
+      "step": 3,
+      "type": "end",
+      "address": "123 Main St, Charlotte, NC 28202"
+    }
+  ]
+}
+'''
