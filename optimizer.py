@@ -32,7 +32,7 @@ def haversine(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
-# ____________________________   Main Optimizer
+# ____________________________   Main Optimizer (with pre-filtering)
 def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
     COST_PER_MILE = 0.6
 
@@ -47,6 +47,7 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
     if user_lat is None or user_lon is None:
         return {"error": "Could not locate your address."}
 
+    # Load data
     data = pd.read_csv(csv_path).dropna(subset=["lat", "lon"])
     if data.empty:
         return {"error": "No stores with valid coordinates available."}
@@ -54,14 +55,17 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
     data["lat"] = data["lat"].astype(float)
     data["lon"] = data["lon"].astype(float)
 
-    stores = data["store_name"].unique()
+    # ✅ PRE-FILTER stores that actually sell something from grocery_list
+    relevant_data = data[data["item"].str.lower().apply(lambda x: any(g.lower() in x for g in grocery_list))]
+    stores = relevant_data["store_name"].unique()
+
     best_combo = None
     best_total = float("inf")
 
-    for r in range(1, max_stores + 1): # Only consider stores that have at least one item in the grocery list
+    # Only iterate over relevant stores
+    for r in range(1, max_stores + 1):
         for store_combo in itertools.combinations(stores, r):
-            subset = data[data["store_name"].isin(store_combo)]
-            subset = subset[subset["item"].str.lower().apply(lambda x: any(g.lower() in x for g in grocery_list))]
+            subset = relevant_data[relevant_data["store_name"].isin(store_combo)]
             if subset.empty:
                 continue
 
@@ -71,7 +75,7 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
 
             total_price = chosen["price"].sum()
 
-            # Greedy nearest-neighbor route. This helps us build an approximate route from one location to the next
+            # ---------------- Greedy nearest-neighbor route ----------------
             store_coords = subset.drop_duplicates("store_name")[["lat", "lon", "address", "store_name"]].values.tolist()
             store_coords = [(float(lat), float(lon), addr, store) for lat, lon, addr, store in store_coords]
 
