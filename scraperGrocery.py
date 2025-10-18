@@ -96,9 +96,7 @@ def toAddressHarris(storeName):
             return v
 
     return "Address not found"
-        #"Trader Joe's, Charlotte" : ,
-        #"Sam's Club, " : "Jw Clay Blvd, Charlotte, NC",
-        #"BJ's, " : "Lyles Ln. Concord, NC 28027"
+        #"BJ's, " : 
 
 def target_scraper(url):
     response = requests.get(url)
@@ -149,10 +147,12 @@ def lidl_scraper(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     storeName = "Steele Creek NC"
     address = "S Tryon St Charlotte, NC 28273"
-    product = soup.find(class_="product-title").text
-    price = soup.find(class_="product-price").text
+    product = soup.find(class_="_price_yvlk6_35").text
+    price = soup.find(class_="_title_1qtbv_71").text
     if "$" in price:
         price = float(product.replace('$',''))
+    if "*" in price:
+        price = float(product.replace('*',''))
     return(f"Aldi,,"+product+","+price)
 
 def traderJoes_scraper(url):
@@ -160,27 +160,33 @@ def traderJoes_scraper(url):
     soup = BeautifulSoup(response.text, 'html.parser')
     storeName = "Charlotte - North"
     address = "E Arbors Dr Charlotte, NC 28262"
-    product = soup.find(class_="product-title").text
-    price = soup.find(class_="product-price").text
+    product = soup.find(class_="Link_link__1AZfr SearchResultCard_searchResultCard__titleLink__2nz6x").text
+    price = soup.find(class_="ProductPrice_productPrice__price__3-50j").text
     if "$" in price:
         price = float(product.replace('$',''))
     return(f"Aldi,,"+product+","+price)
 
-def traderJoes_scraper(url):
+def sams_club_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = "Charlotte - North"
-    address = "E Arbors Dr Charlotte, NC 28262"
-    product = soup.find(class_="product-title").text
-    price = soup.find(class_="product-price").text
+    storeName = "Charlotte Sam's Club #6540"
+    address = "Jw Clay Blvd, Charlotte, NC"
+    product = soup.find(attrs={'data-automation-id':'product-title'}).text
+    price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
     return(f"Aldi,,"+product+","+price)
 
-def scrape_dynamic_content(url):
-    requests.get(url)
-    soup = BeautifulSoup(requests.page_source, 'html.parser')
-    print(f"Scraped content from dynamic page: {soup.find('h1').text}")
+def bjs_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = "Concord, NC"
+    address = "Lyles Ln. Concord, NC 28027"
+    product = soup.find(class_="ProductTitlestyle__ProductTitleStyle-sc-1ypnhsh-0 juKbdo").text
+    price = soup.find(class_="Textstyle__StyledText-sc-1lq8adg-0 eYHhHv display-price ").text
+    if "$" in price:
+        price = float(product.replace('$',''))
+    return(f"Aldi,,"+product+","+price)
 
 # Define the URL and the refresh interval
 target_url = "https://www.target.com/s?searchTerm=bacon&facetedValue=5zkty&ignoreBrandExactness=true&moveTo=product-list-grid"
@@ -192,8 +198,12 @@ harris_teeter_url = "https://www.harristeeter.com/search?query=bacon&searchType=
 sams_club_url = "https://www.samsclub.com/s/bacon"
 bjs_url = "https://www.bjs.com/search?query=bacon"
 
+def runScrapers(listItem):
+    pass
+
+
 refresh_interval = 60
 
 while True:
-    scrape_dynamic_content(target_url)
+    runScrapers("bacon")
     time.sleep(refresh_interval)
