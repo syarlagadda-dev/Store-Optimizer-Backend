@@ -26,10 +26,32 @@ def target_scraper(url):
     storeName = soup.find(attrs={'data-test':'store-name'}).text
     address = toAddress(storeName)
     product = soup.find(attrs={'data-test':'product-title'}).text
-    if "$" in product:
-        product = float(product.replace('$',''))
     price = soup.find(attrs={'data-test':'product-price'}).text
+    if "$" in price:
+        price = float(product.replace('$',''))
     return(f"Target, {storeName},"+address+","+product+","+price)
+
+def walmart_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = soup.find(attrs={class_="mw-none-m mh2-m truncate tr pl4 ml-auto"}).text
+    address = toAddress(storeName)
+    product = soup.find(attrs={'data-automation-id':'product-title'}).text
+    price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
+    if "$" in price:
+        price = float(product.replace('$',''))
+    return(f"Walmart Supercenter, {storeName},"+address+","+product+","+price)
+
+def harris_teeter_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = soup.find(attrs={}).text
+    address = toAddress(storeName)
+    product = soup.find(attrs={'data-test-id':'cart-page-item-description'}).text
+    price = soup.find(attrs={'data-test-id' : 'product-item-unit-price'}).text
+    if "$" in price:
+        price = float(product.replace('$',''))
+    return(f"Harris Teeter, {storeName},"+address+","+product+","+price)
 
 def scrape_dynamic_content(url):
     requests.get(url)
@@ -39,7 +61,7 @@ def scrape_dynamic_content(url):
 
 # Define the URL and the refresh interval
 target_url = "https://www.target.com/s?searchTerm=bacon&facetedValue=5zkty&ignoreBrandExactness=true&moveTo=product-list-grid"
-walmart_url = "https://www.walmart.com/search/?query=bacon"
+walmart_url = "https://www.walmart.com/search?q=bacon&facet=fulfillment_method_in_store%3AIn-store"
 aldi_url = "https://www.aldi.us/en/search/?q=bacon"
 lidl_url = "https://www.lidl.com/search?query=bacon"
 traderjoes_url = "https://www.traderjoes.com/search?query=bacon"
