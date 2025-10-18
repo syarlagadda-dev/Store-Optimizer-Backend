@@ -7,6 +7,17 @@ import csv
 def toAddress(storeName):
     address_dict = {
         "Target, Charlotte East" : "8830 Albemarle Rd, Charlotte, NC",
+        "Target, Charlotte Midtown" : "900 Metropolitan Ave, Charlotte, NC",
+        "Target, Pineville" : "9531 South Blvd, Charlotte, NC",
+        "Walmart Supercenter, Charlotte" : "7735 N Tryon St, Charlotte, NC",
+        "Walmart Supercenter, Concord" : "5825 Thunder Rd, Concord, NC 28027",
+        "Walmart Supercenter, Huntersville" : "11145 Bryton Town Center Dr, Huntersville, NC",
+        "Aldi" : "60134, Geneva",
+        "LIDL, Charlotte, NC" : "S Tryon St Charlotte, NC 28273",
+        "Trader Joe's, Charlotte" : "E Arbors Dr Charlotte, NC 28262",
+        "Harris Teeter, 12190 University City Blvd" : "12190 University City Blvd",
+        "Sam's Club, " : "Jw Clay Blvd, Charlotte, NC",
+        "BJ's, " : "Lyles Ln. Concord, NC 28027"
     }
     return address_dict.get(storeName, "Address not found")
 
