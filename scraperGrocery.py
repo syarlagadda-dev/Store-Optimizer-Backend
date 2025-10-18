@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from bs4 import *
 import requests 
 import time
 import csv
@@ -54,7 +55,7 @@ walmart_url = "https://www.walmart.com/search?q=bacon&facet=fulfillment_method_i
 aldi_url = "https://www.aldi.us/en/search/?q=bacon"
 lidl_url = "https://www.lidl.com/search?query=bacon"
 traderjoes_url = "https://www.traderjoes.com/search?query=bacon"
-harris_teeter_url = "https://www.harristeeter.com/search?query=bacon"
+harris_teeter_url = "https://www.harristeeter.com/search?query=bacon&searchType=default_search&fulfillment=ais"
 sams_club_url = "https://www.samsclub.com/s/bacon"
 bjs_url = "https://www.bjs.com/search?query=bacon"
 
