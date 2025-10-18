@@ -33,7 +33,7 @@ def haversine(lat1, lon1, lat2, lon2):
     return R * c
 
 # ____________________________   Main Optimizer (with pre-filtering)
-def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
+def find_best_combo(csv_path, grocery_list, max_stores, user_address):
     COST_PER_MILE = 0.6
 
     def all_items_found(chosen_items, grocery_list):
@@ -43,9 +43,22 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
                 return False
         return True
 
+    error_status = False
+    error_message = "error:   "
+
     user_lat, user_lon = get_coords_from_address(user_address)
     if user_lat is None or user_lon is None:
-        return {"error": "Could not locate your address."}
+        error_status = True
+        error_message += "Could not locate your address.   "
+    if grocery_list is None:
+        error_status = True
+        error_message += "No item list.   "
+    if max_stores is None:
+        error_status = True
+        error_message += "Please indicate maximum stores.   "
+    
+    if error_status:
+        return error_message
 
     # Load data
     data = pd.read_csv(csv_path).dropna(subset=["lat", "lon"])
@@ -108,7 +121,7 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
 
             total_with_travel = total_price + route_distance * COST_PER_MILE
 
-            if total_with_travel < best_total and total_with_travel <= budget:
+            if total_with_travel < best_total:
                 best_total = total_with_travel
                 formatted_items = [
                     f"{row['item']} (${row['price']}) : {row['store_name']} - {row['address']}"
@@ -123,7 +136,7 @@ def find_best_combo(csv_path, grocery_list, budget, max_stores, user_address):
                     "route_order": route_order
                 }
 
-    return best_combo or {"error": "No valid combination found within budget."}
+    return best_combo or {"error": "No valid combination found, try changing your max stores or item list."}
 
 # ___________________ Run example
 if __name__ == "__main__":
@@ -131,13 +144,12 @@ if __name__ == "__main__":
     csv_path = "prices_with_coords.csv"  # Make sure this file is in the same folder
 
     # Sample test run (you can later link this to a frontend)
-    user_address = '123 Main St, Charlotte, NC 28202'
+    user_address = "123 main street, Charlotte, NC"
 
     grocery_list = ["milk", "bread", "eggs"]  # You can customize or make this user input
-    budget = 40
     max_stores = 3
 
-    result = find_best_combo(csv_path, grocery_list, budget, max_stores, user_address)
+    result = find_best_combo(csv_path, grocery_list, max_stores, user_address)
     print("\n🔍 Best Shopping Plan:")
     print(result)
 
