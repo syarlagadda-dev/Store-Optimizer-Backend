@@ -23,24 +23,24 @@ def target_scraper(url):
 def walmart_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = soup.find(attrs={}).text
+    storeName = soup.find(attrs={class_="mw-none-m mh2-m truncate tr pl4 ml-auto"}).text
     address = toAddress(storeName)
     product = soup.find(attrs={'data-automation-id':'product-title'}).text
     price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Target, {storeName},"+address+","+product+","+price)
+    return(f"Walmart Supercenter, {storeName},"+address+","+product+","+price)
 
-def foodlion_scraper(url):
+def harris_teeter_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     storeName = soup.find(attrs={}).text
     address = toAddress(storeName)
-    product = soup.find(attrs={'data-automation-id':'product-title'}).text
-    price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
+    product = soup.find(attrs={'data-test-id':'cart-page-item-description'}).text
+    price = soup.find(attrs={'data-test-id' : 'product-item-unit-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Target, {storeName},"+address+","+product+","+price)
+    return(f"Harris Teeter, {storeName},"+address+","+product+","+price)
 
 def scrape_dynamic_content(url):
     requests.get(url)
@@ -50,14 +50,13 @@ def scrape_dynamic_content(url):
 
 # Define the URL and the refresh interval
 target_url = "https://www.target.com/s?searchTerm=bacon&facetedValue=5zkty&ignoreBrandExactness=true&moveTo=product-list-grid"
-walmart_url = "https://www.walmart.com/search/?query=bacon"
+walmart_url = "https://www.walmart.com/search?q=bacon&facet=fulfillment_method_in_store%3AIn-store"
 aldi_url = "https://www.aldi.us/en/search/?q=bacon"
 lidl_url = "https://www.lidl.com/search?query=bacon"
 traderjoes_url = "https://www.traderjoes.com/search?query=bacon"
 harris_teeter_url = "https://www.harristeeter.com/search?query=bacon"
 sams_club_url = "https://www.samsclub.com/s/bacon"
 bjs_url = "https://www.bjs.com/search?query=bacon"
-foodLion_url = "https://www.foodlion.com/search?query=bacon"
 
 refresh_interval = 60
 
