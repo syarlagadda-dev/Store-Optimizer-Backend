@@ -33,7 +33,7 @@ export function SearchForm({ onSearch, isLoading }: SearchFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Card>
+      <Card className="border-[#A7866B]/30 shadow-md bg-white">
         <CardContent className="pt-6">
           <div className="grid gap-6 md:grid-cols-2">
             {/* Home Address */}
@@ -69,7 +69,7 @@ export function SearchForm({ onSearch, isLoading }: SearchFormProps) {
                 rows={4}
                 required
               />
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-[#725842]">
                 Enter items separated by commas
               </p>
             </div>
@@ -116,7 +116,7 @@ export function SearchForm({ onSearch, isLoading }: SearchFormProps) {
 
           <Button
             type="submit"
-            className="w-full mt-6 bg-emerald-600 hover:bg-emerald-700"
+            className="w-full mt-6 bg-[#725842] hover:bg-[#666D55] text-white shadow-md"
             disabled={isLoading}
           >
             {isLoading ? "Finding Best Routes..." : "Find Cheapest Route"}
