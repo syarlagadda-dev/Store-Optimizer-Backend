@@ -3,6 +3,13 @@ import requests
 import time
 import csv
 
+def toAddress(storeName):
+    address_dict = {
+        "Target - Downtown": "123 Main St, City, State, ZIP",
+        "Target - Uptown": "456 Elm St, City, State, ZIP",
+        # Add more mappings as needed
+    }
+    return address_dict.get(storeName, "Address not found")
 
 def target_scraper(url):
     response = requests.get(url)
