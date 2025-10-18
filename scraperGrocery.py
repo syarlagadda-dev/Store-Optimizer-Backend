@@ -37,7 +37,7 @@ def target_scraper(url):
 def walmart_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = soup.find(attrs={class_="mw-none-m mh2-m truncate tr pl4 ml-auto"}).text
+    storeName = soup.find(class_="mw-none-m mh2-m truncate tr pl4 ml-auto").text
     address = toAddress(storeName)
     product = soup.find(attrs={'data-automation-id':'product-title'}).text
     price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
@@ -48,13 +48,24 @@ def walmart_scraper(url):
 def harris_teeter_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = soup.find(attrs={}).text
+    storeName = soup.find(attrs={'data-testid' : 'PickupAddressText'}).text
     address = toAddress(storeName)
     product = soup.find(attrs={'data-test-id':'cart-page-item-description'}).text
     price = soup.find(attrs={'data-test-id' : 'product-item-unit-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
     return(f"Harris Teeter, {storeName},"+address+","+product+","+price)
+
+def aldi_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = "Aldi"
+    address = toAddress(storeName)
+    product = soup.find(class_="product-title").text
+    price = soup.find(class_="product-price").text
+    if "$" in price:
+        price = float(product.replace('$',''))
+    return(f"Aldi,"+address+","+product+","+price)
 
 def scrape_dynamic_content(url):
     requests.get(url)
