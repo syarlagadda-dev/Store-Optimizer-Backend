@@ -201,8 +201,8 @@ bjs_url = "https://www.bjs.com/search?query=bacon"
 def runScrapers(listItem):
     pass
 
-
-refresh_interval = 60
+#p
+refresh_interval = 60 
 
 while True:
     runScrapers("bacon")
