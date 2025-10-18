@@ -20,13 +20,13 @@ def target_scraper(url):
         price = float(product.replace('$',''))
     return(f"Target, {storeName},"+address+","+product+","+price)
 
-def target_scraper(url):
+def walmart_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = soup.find(attrs={'data-test':'store-name'}).text
+    storeName = soup.find(attrs={}).text
     address = toAddress(storeName)
-    product = soup.find(attrs={'data-test':'product-title'}).text
-    price = soup.find(attrs={'data-test':'product-price'}).text
+    product = soup.find(attrs={'data-automation-id':'product-title'}).text
+    price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
     return(f"Target, {storeName},"+address+","+product+","+price)
