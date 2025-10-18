@@ -15,7 +15,9 @@ def toAddress(storeName):
         "Aldi" : "Park Rd., Charlotte, NC 280210",
         "LIDL, Charlotte, NC" : "S Tryon St Charlotte, NC 28273",
         "Trader Joe's, Charlotte" : "E Arbors Dr Charlotte, NC 28262",
-        "Harris Teeter, 12190 University City Blvd" : "12190 University City Blvd",
+        "Harris Teeter, Cochran Commons" : "W Mallard Creek Church Rd CHARLOTTE, NC 28262",
+        "Harris Teeter, Town Center Plaza" : "University City Blvd Charlotte, NC 28213",
+        "Harris Teeter, Highland Creek" : "Highland Shoppes Dr Charlotte, NC 28269",
         "Sam's Club, " : "Jw Clay Blvd, Charlotte, NC",
         "BJ's, " : "Lyles Ln. Concord, NC 28027"
     }
