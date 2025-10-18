@@ -5,9 +5,7 @@ import csv
 
 def toAddress(storeName):
     address_dict = {
-        "Target - Downtown": "123 Main St, City, State, ZIP",
-        "Target - Uptown": "456 Elm St, City, State, ZIP",
-        # Add more mappings as needed
+        "Target, Charlotte East" : "8830 Albemarle Rd, Charlotte, NC",
     }
     return address_dict.get(storeName, "Address not found")
 
