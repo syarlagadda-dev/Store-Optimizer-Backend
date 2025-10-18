@@ -144,7 +144,7 @@ if __name__ == "__main__":
     csv_path = "prices_with_coords.csv"  # Make sure this file is in the same folder
 
     # Sample test run (you can later link this to a frontend)
-    user_address = "123 main street, Charlotte, NC"
+    user_address = "Jw Clay Blvd, Charlotte, NC"
 
     grocery_list = ["milk", "bread", "eggs"]  # You can customize or make this user input
     max_stores = 3
