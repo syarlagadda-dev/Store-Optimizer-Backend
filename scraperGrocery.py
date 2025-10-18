@@ -4,6 +4,25 @@ import requests
 import time
 import csv
 
+CSV_PATH = "prices_with_coords.csv"
+
+def _append_row_to_csv(store_name, address, item, price, csv_path=CSV_PATH):
+    """Append a row to CSV with columns: store_name,address,item,price,lat,lon.
+    Does not modify the `price` value; writes it as-is.
+    """
+    header = ["store_name", "address", "item", "price", "lat", "lon"]
+    write_header = True
+    try:
+        write_header = not (open(csv_path, 'r', encoding='utf-8').read().strip())
+    except FileNotFoundError:
+        write_header = True
+
+    with open(csv_path, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if write_header:
+            writer.writerow(header)
+        writer.writerow([store_name, address, item, price, "", ""])
+
 
 
 def toAddressTarget(storeName):
@@ -96,7 +115,6 @@ def toAddressHarris(storeName):
             return v
 
     return "Address not found"
-        #"BJ's, " : 
 
 def target_scraper(url):
     response = requests.get(url)
@@ -107,7 +125,9 @@ def target_scraper(url):
     price = soup.find(attrs={'data-test':'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Target, {storeName},"+address+","+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Target", storeName, address, product, price)
+    return None
 
 def walmart_scraper(url):
     response = requests.get(url)
@@ -118,7 +138,9 @@ def walmart_scraper(url):
     price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Walmart Supercenter,{storeName},"+address+","+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Walmart Supercenter", storeName, address, product, price)
+    return None
 
 def harris_teeter_scraper(url):
     response = requests.get(url)
@@ -129,7 +151,9 @@ def harris_teeter_scraper(url):
     price = soup.find(attrs={'data-test-id' : 'product-item-unit-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Harris Teeter, {storeName},"+address+","+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Harris Teeter", storeName, address, product, price)
+    return None
 
 def aldi_scraper(url):
     response = requests.get(url)
@@ -140,7 +164,9 @@ def aldi_scraper(url):
     price = soup.find(class_="product-price").text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Aldi,,"+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Aldi", storeName, address, product, price)
+    return None
 
 def lidl_scraper(url):
     response = requests.get(url)
@@ -153,7 +179,9 @@ def lidl_scraper(url):
         price = float(product.replace('$',''))
     if "*" in price:
         price = float(product.replace('*',''))
-    return(f"Aldi,,"+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("LIDL",storeName, address, product, price)
+    return None
 
 def traderJoes_scraper(url):
     response = requests.get(url)
@@ -164,7 +192,9 @@ def traderJoes_scraper(url):
     price = soup.find(class_="ProductPrice_productPrice__price__3-50j").text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Aldi,,"+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Trader Joe's",storeName, address, product, price)
+    return None
 
 def sams_club_scraper(url):
     response = requests.get(url)
@@ -175,7 +205,9 @@ def sams_club_scraper(url):
     price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Aldi,,"+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("Sam's Club",storeName, address, product, price)
+    return None
 
 def bjs_scraper(url):
     response = requests.get(url)
@@ -186,7 +218,9 @@ def bjs_scraper(url):
     price = soup.find(class_="Textstyle__StyledText-sc-1lq8adg-0 eYHhHv display-price ").text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Aldi,,"+product+","+price)
+    # write row using existing price variable
+    _append_row_to_csv("BJ's",storeName, address, product, price)
+    return None
 
 # Define the URL and the refresh interval
 target_url = "https://www.target.com/s?searchTerm=bacon&facetedValue=5zkty&ignoreBrandExactness=true&moveTo=product-list-grid"
@@ -201,7 +235,7 @@ bjs_url = "https://www.bjs.com/search?query=bacon"
 def runScrapers(listItem):
     pass
 
-#p
+
 refresh_interval = 60 
 
 while True:

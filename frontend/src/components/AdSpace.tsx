@@ -12,14 +12,14 @@ export function AdSpace({ size, label = "Advertisement" }: AdSpaceProps) {
   };
 
   return (
-    <div className={`w-full ${sizeClasses[size]} bg-gradient-to-br from-gray-200 to-gray-300 border border-gray-300 rounded-lg flex flex-col items-center justify-center p-4 shadow-sm`}>
+    <div className={`w-full ${sizeClasses[size]} bg-gradient-to-br from-[#D6C9B8] to-[#F0ECE4] border border-[#D6C9B8] rounded-lg flex flex-col items-center justify-center p-4 shadow-sm`}>
       <div className="text-center">
-        <div className="w-12 h-12 bg-gray-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+        <div className="w-12 h-12 bg-[#A7866B] rounded-full mx-auto mb-3 flex items-center justify-center">
           <span className="text-white text-xl">Ad</span>
         </div>
-        <p className="text-gray-600 text-sm mb-2">{label}</p>
-        <p className="text-xs text-gray-500">Your ad could be here</p>
-        <div className="mt-4 px-4 py-2 bg-gray-400 text-white text-xs rounded">
+        <p className="text-[#725842] text-sm mb-2">{label}</p>
+        <p className="text-xs text-[#A7866B]">Your ad could be here</p>
+        <div className="mt-4 px-4 py-2 bg-[#725842] text-white text-xs rounded">
           Learn More
         </div>
       </div>
