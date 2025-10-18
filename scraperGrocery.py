@@ -4,6 +4,8 @@ import requests
 import time
 import csv
 
+
+
 def toAddress(storeName):
     address_dict = {
         "Target, Charlotte East" : "8830 Albemarle Rd, Charlotte, NC",
@@ -41,12 +43,12 @@ def walmart_scraper(url):
     price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Walmart Supercenter, {storeName},"+address+","+product+","+price)
+    return(f"Walmart Supercenter,{storeName},"+address+","+product+","+price)
 
 def harris_teeter_scraper(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    storeName = soup.find(attrs={'data-testid' : 'PickupAddressText'}).text
+    storeName = soup.find(attrs={'data-testid' : 'CurrentModality-vanityName'}).text
     address = toAddress(storeName)
     product = soup.find(attrs={'data-test-id':'cart-page-item-description'}).text
     price = soup.find(attrs={'data-test-id' : 'product-item-unit-price'}).text
@@ -63,7 +65,7 @@ def aldi_scraper(url):
     price = soup.find(class_="product-price").text
     if "$" in price:
         price = float(product.replace('$',''))
-    return(f"Aldi,"+address+","+product+","+price)
+    return(f"Aldi,,"+product+","+price)
 
 def scrape_dynamic_content(url):
     requests.get(url)
