@@ -1,17 +1,17 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pandas as pd
 import itertools
 import math
 from geopy.geocoders import Nominatim
 
-# ____________________________   User coordinates will converted to longitude and latitude to help count distance
+app = Flask(__name__)
+CORS(app)  # allow frontend calls from browsers
+
+# ____________________________   Address → Coordinates
 def get_coords_from_address(address):
-    """
-    Converts a user address (string) into (lat, lon).
-    Returns (None, None) if not found or invalid.
-    """
     if not address or address.strip() == "":
         return None, None
-
     geolocator = Nominatim(user_agent="grocery_optimizer_app")
     try:
         location = geolocator.geocode(address, timeout=10)
@@ -23,16 +23,18 @@ def get_coords_from_address(address):
         print(f"⚠️ Geocoding error: {e}")
         return None, None
 
-# ____________________________   Function to calculate distance between coordinates (in miles)
+
+# ____________________________   Distance in miles
 def haversine(lat1, lon1, lat2, lon2):
-    R = 3958.8  # Earth radius in miles
+    R = 3958.8
     dLat = math.radians(lat2 - lat1)
     dLon = math.radians(lon2 - lon1)
     a = math.sin(dLat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dLon/2)**2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
-# ____________________________   Main Optimizer (with pre-filtering)
+
+# ____________________________   Main Optimizer
 def find_best_combo(csv_path, grocery_list, max_stores, user_address):
     COST_PER_MILE = 0.6
 
@@ -44,21 +46,21 @@ def find_best_combo(csv_path, grocery_list, max_stores, user_address):
         return True
 
     error_status = False
-    error_message = "error:   "
+    error_message = "error: "
 
     user_lat, user_lon = get_coords_from_address(user_address)
     if user_lat is None or user_lon is None:
         error_status = True
-        error_message += "Could not locate your address.   "
+        error_message += "Could not locate your address. "
     if grocery_list is None:
         error_status = True
-        error_message += "No item list.   "
+        error_message += "No item list. "
     if max_stores is None:
         error_status = True
-        error_message += "Please indicate maximum stores.   "
-    
+        error_message += "Please indicate maximum stores. "
+
     if error_status:
-        return error_message
+        return {"error": error_message.strip()}
 
     # Load data
     data = pd.read_csv(csv_path).dropna(subset=["lat", "lon"])
@@ -68,14 +70,12 @@ def find_best_combo(csv_path, grocery_list, max_stores, user_address):
     data["lat"] = data["lat"].astype(float)
     data["lon"] = data["lon"].astype(float)
 
-    # ✅ PRE-FILTER stores that actually sell something from grocery_list
     relevant_data = data[data["item"].str.lower().apply(lambda x: any(g.lower() in x for g in grocery_list))]
     stores = relevant_data["store_name"].unique()
 
     best_combo = None
     best_total = float("inf")
 
-    # Only iterate over relevant stores
     for r in range(1, max_stores + 1):
         for store_combo in itertools.combinations(stores, r):
             subset = relevant_data[relevant_data["store_name"].isin(store_combo)]
@@ -88,7 +88,6 @@ def find_best_combo(csv_path, grocery_list, max_stores, user_address):
 
             total_price = chosen["price"].sum()
 
-            # ---------------- Greedy nearest-neighbor route ----------------
             store_coords = subset.drop_duplicates("store_name")[["lat", "lon", "address", "store_name"]].values.tolist()
             store_coords = [(float(lat), float(lon), addr, store) for lat, lon, addr, store in store_coords]
 
@@ -114,7 +113,6 @@ def find_best_combo(csv_path, grocery_list, max_stores, user_address):
                 step_counter += 1
                 unvisited.pop(nearest_idx)
 
-            # Return to user
             dist_back = haversine(current_lat, current_lon, user_lat, user_lon)
             route_distance += dist_back
             route_order.append({"step": step_counter, "type": "end", "address": user_address})
@@ -136,57 +134,35 @@ def find_best_combo(csv_path, grocery_list, max_stores, user_address):
                     "route_order": route_order
                 }
 
-    return best_combo or {"error": "No valid combination found, try changing your max stores or item list."}
+    return best_combo or {"error": "No valid combination found. Try changing your max stores or item list."}
 
-# ___________________ Run example
-if __name__ == "__main__":
-    print("🛒 Grocery Optimizer Demo 🛒")
-    csv_path = "prices_with_coords.csv"  # Make sure this file is in the same folder
 
-    # Sample test run (you can later link this to a frontend)
-    user_address = "Jw Clay Blvd, Charlotte, NC"
-
-    grocery_list = ["milk", "bread", "eggs"]  # You can customize or make this user input
-    max_stores = 3
+# ____________________________   Flask API Route
+@app.route("/optimize", methods=["POST"])
+def optimize():
+    """
+    Example request JSON:
+    {
+      "csv_path": "prices_with_coords.csv",
+      "grocery_list": ["milk", "bread", "eggs"],
+      "max_stores": 3,
+      "user_address": "Jw Clay Blvd, Charlotte, NC"
+    }
+    """
+    data = request.get_json()
+    csv_path = data.get("csv_path")
+    grocery_list = data.get("grocery_list")
+    max_stores = data.get("max_stores")
+    user_address = data.get("user_address")
 
     result = find_best_combo(csv_path, grocery_list, max_stores, user_address)
-    print("\n🔍 Best Shopping Plan:")
-    print(result)
+    return jsonify(result)
 
 
+@app.route("/")
+def home():
+    return "🛒 Grocery Optimizer API is running! Send POST to /optimize"
 
 
-
-# JSON output example
-'''
-{
-  "stores": [
-    "Target"
-  ],
-  "items": [
-    "bread ($2.3) : Target - 123 Main St, Charlotte, NC",
-    "eggs ($2.9) : Target - 123 Main St, Charlotte, NC",
-    "milk ($3.6) : Target - 123 Main St, Charlotte, NC"
-  ],
-  "item_total": 8.8,
-  "miles_traveled": 0.37,
-  "approximate_total_cost": 9.02,
-  "route_order": [
-    {
-      "step": 1,
-      "type": "start",
-      "address": "123 Main St, Charlotte, NC 28202"
-    },
-    {
-      "step": 2,
-      "type": "store",
-      "address": "Target - 123 Main St, Charlotte, NC"
-    },
-    {
-      "step": 3,
-      "type": "end",
-      "address": "123 Main St, Charlotte, NC 28202"
-    }
-  ]
-}
-'''
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
