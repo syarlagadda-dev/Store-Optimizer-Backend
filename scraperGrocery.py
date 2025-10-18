@@ -1,26 +1,36 @@
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+import requests 
 import time
 import csv
 
-# Set up Selenium WebDriver (requires ChromeDriver)
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run in the background
-service = Service(executable_path='/path/to/chromedriver')
-driver = webdriver.Chrome(service=service, options=chrome_options)
+
+def target_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = soup.find(attrs={'data-test':'store-name'}).text
+    address = toAddress(storeName)
+    product = soup.find(attrs={'data-test':'product-title'}).text
+    if "$" in product:
+        product = float(product.replace('$',''))
+    price = soup.find(attrs={'data-test':'product-price'}).text
+    return(f"Target, {storeName},"+address+","+product+","+price)
 
 def scrape_dynamic_content(url):
-    driver.get(url)
-    time.sleep(5)  # Wait for JavaScript to load content
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    requests.get(url)
+    soup = BeautifulSoup(requests.page_source, 'html.parser')
     # Your scraping logic here
     print(f"Scraped content from dynamic page: {soup.find('h1').text}")
 
 # Define the URL and the refresh interval
-target_url = "http://example.com/dynamic-page"
+target_url = "https://www.target.com/s?searchTerm=bacon&facetedValue=5zkty&ignoreBrandExactness=true&moveTo=product-list-grid"
+walmart_url = "https://www.walmart.com/search/?query=bacon"
+aldi_url = "https://www.aldi.us/en/search/?q=bacon"
+lidl_url = "https://www.lidl.com/search?query=bacon"
+traderjoes_url = "https://www.traderjoes.com/search?query=bacon"
+harris_teeter_url = "https://www.harristeeter.com/search?query=bacon"
+sams_club_url = "https://www.samsclub.com/s/bacon"
+bjs_url = "https://www.bjs.com/search?query=bacon"
+
 refresh_interval = 60
 
 while True:
