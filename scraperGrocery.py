@@ -31,6 +31,17 @@ def walmart_scraper(url):
         price = float(product.replace('$',''))
     return(f"Target, {storeName},"+address+","+product+","+price)
 
+def foodlion_scraper(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    storeName = soup.find(attrs={}).text
+    address = toAddress(storeName)
+    product = soup.find(attrs={'data-automation-id':'product-title'}).text
+    price = soup.find(attrs={'data-automation-id' : 'product-price'}).text
+    if "$" in price:
+        price = float(product.replace('$',''))
+    return(f"Target, {storeName},"+address+","+product+","+price)
+
 def scrape_dynamic_content(url):
     requests.get(url)
     soup = BeautifulSoup(requests.page_source, 'html.parser')
@@ -46,6 +57,7 @@ traderjoes_url = "https://www.traderjoes.com/search?query=bacon"
 harris_teeter_url = "https://www.harristeeter.com/search?query=bacon"
 sams_club_url = "https://www.samsclub.com/s/bacon"
 bjs_url = "https://www.bjs.com/search?query=bacon"
+foodLion_url = "https://www.foodlion.com/search?query=bacon"
 
 refresh_interval = 60
 
