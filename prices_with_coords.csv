@@ -1,35 +1,35 @@
 store_name,address,item,price,lat,lon
-"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","milk",3.5,35.2101,-80.8325
-"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","bread",2.3,35.2101,-80.8325
-"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","eggs",2.9,35.2101,-80.8325
-"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","apples",1.6,35.2101,-80.8325
-"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","milk",35.2200,-80.8300
-"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","bread",35.2200,-80.8300
-"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","chicken",35.2200,-80.8300
-"Target, Pineville","9531 South Blvd, Charlotte, NC","milk",35.1500,-80.8500
-"Target, Pineville","9531 South Blvd, Charlotte, NC","cheese",35.1500,-80.8500
-"Target, Pineville","9531 South Blvd, Charlotte, NC","apples",35.1500,-80.8500
-"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","bread",35.2954,-80.7583
-"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","eggs",35.2954,-80.7583
-"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","chicken",35.2954,-80.7583
-"Walmart Supercenter, Concord","5825 Thunder Rd, Concord, NC 28027","milk",35.4000,-80.6000
-"Walmart Supercenter, Concord","5825 Thunder Rd, Concord, NC 28027","apples",35.4000,-80.6000
-"Walmart Supercenter, Huntersville","11145 Bryton Town Center Dr, Huntersville, NC","eggs",35.4500,-80.8000
-"Walmart Supercenter, Huntersville","11145 Bryton Town Center Dr, Huntersville, NC","bread",35.4500,-80.8000
-"Aldi","10629 Park Rd, Charlotte, NC 28210","milk",35.1508,-80.8517
-"Aldi","10629 Park Rd, Charlotte, NC 28210","butter",35.1508,-80.8517
-"Aldi","10629 Park Rd, Charlotte, NC 28210","cheese",35.1508,-80.8517
-"LIDL, Charlotte, NC","S Tryon St, Charlotte, NC 28273","eggs",35.1179,-80.9564
-"LIDL, Charlotte, NC","S Tryon St, Charlotte, NC 28273","bread",35.1179,-80.9564
-"Trader Joe's, Charlotte","E Arbors Dr, Charlotte, NC 28262","apples",35.2155,-80.8350
-"Trader Joe's, Charlotte","E Arbors Dr, Charlotte, NC 28262","milk",35.2155,-80.8350
-"Harris Teeter, Cochran Commons","W Mallard Creek Church Rd, Charlotte, NC 28262","chicken",35.2300,-80.8200
-"Harris Teeter, Cochran Commons","W Mallard Creek Church Rd, Charlotte, NC 28262","bread",35.2300,-80.8200
-"Harris Teeter, Town Center Plaza","University City Blvd, Charlotte, NC 28213","eggs",35.2250,-80.8250
-"Harris Teeter, Town Center Plaza","University City Blvd, Charlotte, NC 28213","milk",35.2250,-80.8250
-"Harris Teeter, Highland Creek","Highland Shoppes Dr, Charlotte, NC 28269","butter",35.2350,-80.8150
-"Harris Teeter, Highland Creek","Highland Shoppes Dr, Charlotte, NC 28269","cheese",35.2350,-80.8150
-"Sam's Club","Jw Clay Blvd, Charlotte, NC","milk",35.2400,-80.8300
-"Sam's Club","Jw Clay Blvd, Charlotte, NC","chicken",35.2400,-80.8300
-"BJ's","Lyles Ln, Concord, NC 28027","bread",35.4050,-80.5950
-"BJ's","Lyles Ln, Concord, NC 28027","eggs",35.4050,-80.5950
+"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","milk",3.49,35.2101,-80.8325
+"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","bread",2.39,35.2101,-80.8325
+"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","eggs",2.89,35.2101,-80.8325
+"Target, Charlotte East","8830 Albemarle Rd, Charlotte, NC","apples",1.69,35.2101,-80.8325
+"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","milk",3.59,35.2200,-80.8300
+"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","bread",2.49,35.2200,-80.8300
+"Target, Charlotte Midtown","900 Metropolitan Ave, Charlotte, NC","chicken",5.99,35.2200,-80.8300
+"Target, Pineville","9531 South Blvd, Charlotte, NC","milk",3.39,35.1500,-80.8500
+"Target, Pineville","9531 South Blvd, Charlotte, NC","cheese",4.29,35.1500,-80.8500
+"Target, Pineville","9531 South Blvd, Charlotte, NC","apples",1.79,35.1500,-80.8500
+"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","bread",1.89,35.2954,-80.7583
+"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","eggs",2.59,35.2954,-80.7583
+"Walmart Supercenter, Charlotte","7735 N Tryon St, Charlotte, NC","chicken",4.99,35.2954,-80.7583
+"Walmart Supercenter, Concord","5825 Thunder Rd, Concord, NC 28027","milk",3.19,35.4000,-80.6000
+"Walmart Supercenter, Concord","5825 Thunder Rd, Concord, NC 28027","apples",1.59,35.4000,-80.6000
+"Walmart Supercenter, Huntersville","11145 Bryton Town Center Dr, Huntersville, NC","eggs",2.49,35.4500,-80.8000
+"Walmart Supercenter, Huntersville","11145 Bryton Town Center Dr, Huntersville, NC","bread",1.79,35.4500,-80.8000
+"Aldi","10629 Park Rd, Charlotte, NC 28210","milk",2.69,35.1508,-80.8517
+"Aldi","10629 Park Rd, Charlotte, NC 28210","butter",3.49,35.1508,-80.8517
+"Aldi","10629 Park Rd, Charlotte, NC 28210","cheese",3.19,35.1508,-80.8517
+"LIDL, Charlotte, NC","S Tryon St, Charlotte, NC 28273","eggs",2.39,35.1179,-80.9564
+"LIDL, Charlotte, NC","S Tryon St, Charlotte, NC 28273","bread",1.59,35.1179,-80.9564
+"Trader Joe's, Charlotte","E Arbors Dr, Charlotte, NC 28262","apples",1.99,35.2155,-80.8350
+"Trader Joe's, Charlotte","E Arbors Dr, Charlotte, NC 28262","milk",3.09,35.2155,-80.8350
+"Harris Teeter, Cochran Commons","W Mallard Creek Church Rd, Charlotte, NC 28262","chicken",6.29,35.2300,-80.8200
+"Harris Teeter, Cochran Commons","W Mallard Creek Church Rd, Charlotte, NC 28262","bread",2.69,35.2300,-80.8200
+"Harris Teeter, Town Center Plaza","University City Blvd, Charlotte, NC 28213","eggs",2.99,35.2250,-80.8250
+"Harris Teeter, Town Center Plaza","University City Blvd, Charlotte, NC 28213","milk",3.79,35.2250,-80.8250
+"Harris Teeter, Highland Creek","Highland Shoppes Dr, Charlotte, NC 28269","butter",4.19,35.2350,-80.8150
+"Harris Teeter, Highland Creek","Highland Shoppes Dr, Charlotte, NC 28269","cheese",4.59,35.2350,-80.8150
+"Sam's Club","Jw Clay Blvd, Charlotte, NC","milk",2.99,35.2400,-80.8300
+"Sam's Club","Jw Clay Blvd, Charlotte, NC","chicken",5.29,35.2400,-80.8300
+"BJ's","Lyles Ln, Concord, NC 28027","bread",1.99,35.4050,-80.5950
+"BJ's","Lyles Ln, Concord, NC 28027","eggs",2.69,35.4050,-80.5950
