@@ -5,6 +5,8 @@ This project is a full-stack application consisting of a front end, middleware, 
 Regarding the current state of this project, frontend-to-backend integration isn’t configured just yet, but the intended workflow when pushed to production is as follows:
 
   Frontend - User will send in their parameters here, and their route will be displayed here. User inputs are sent as a JSON object to the API.
+  
   Flask API - Receives JSON object from the frontend, and then performs computation using data from the backend, before sending its output back to the frontend as a JSON to be displayed.
+  
   Backend Database - A CSV file containing products, prices, the store they belong to, and store location (individual products are aggregated into stores during computation). The CSV will be populated by running a web scraper over retailer websites to get product info.
 
